@@ -12,10 +12,22 @@ class QuestionsList extends Component {
     return (
       <div>
         <div className="tab">
-          <button value="unanswered" onClick={this.changeTab}>
+          <button
+            value="unanswered"
+            className={
+              this.state.tab === "unanswered" ? "selected" : "unselected"
+            }
+            onClick={this.changeTab}
+          >
             Unanswered
           </button>
-          <button value="answered" onClick={this.changeTab}>
+          <button
+            value="answered"
+            className={
+              this.state.tab === "answered" ? "selected" : "unselected"
+            }
+            onClick={this.changeTab}
+          >
             Answered
           </button>
         </div>

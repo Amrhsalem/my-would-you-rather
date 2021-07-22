@@ -86,9 +86,9 @@ li {
   border: solid black 2px;
   padding: 5px;
 }
-/* .tabs {
+.tabs {
   margin: auto;
-} */
+}
 .tab {
   display: flex;
   justify-content: center;
@@ -115,7 +115,7 @@ li {
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+.tab .selected {
   background-color: #ccc;
 }
 a:link {
