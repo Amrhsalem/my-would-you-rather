@@ -8,16 +8,14 @@ import AnsweredQuestion from "./AnsweredQuestion";
 class QuestionRouter extends Component {
   render() {
     // const { id } = this.props.match.params;
-    const { answeredIdList, id, authedUser } = this.props;
+    const { answeredIdList, id, authedUser, unansweredIdList } = this.props;
     return (
       <div>
         {authedUser !== null ? (
           answeredIdList.includes(id) ? (
-            answeredIdList.includes(id) ? (
-              <AnsweredQuestion id={id} />
-            ) : (
-              <UnansweredQuestion id={id} />
-            )
+            <AnsweredQuestion id={id} />
+          ) : unansweredIdList.includes(id) ? (
+            <UnansweredQuestion id={id} />
           ) : (
             <Redirect to="/404" />
           )
@@ -34,14 +32,14 @@ function mapStateToProps({ questions, users, authedUser }, props) {
   if (authedUser !== null) {
     const { id } = props.match.params;
     const answeredIdList = Object.keys(users[authedUser].answers);
-    //   const unansweredIdList = Object.keys(questions).filter((q) => {
-    //     return !answeredIdList.includes(q);
-    //   });
+    const unansweredIdList = Object.keys(questions).filter((q) => {
+      return !answeredIdList.includes(q);
+    });
     return {
       id,
       answeredIdList,
       authedUser,
-      //  unansweredIdList
+      unansweredIdList,
     };
   }
   return { authedUser };
