@@ -13,9 +13,13 @@ class QuestionRouter extends Component {
       <div>
         {authedUser !== null ? (
           answeredIdList.includes(id) ? (
-            <AnsweredQuestion id={id} />
+            answeredIdList.includes(id) ? (
+              <AnsweredQuestion id={id} />
+            ) : (
+              <UnansweredQuestion id={id} />
+            )
           ) : (
-            <UnansweredQuestion id={id} />
+            <Redirect to="/404" />
           )
         ) : (
           <Redirect
@@ -36,6 +40,7 @@ function mapStateToProps({ questions, users, authedUser }, props) {
     return {
       id,
       answeredIdList,
+      authedUser,
       //  unansweredIdList
     };
   }
