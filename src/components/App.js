@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { LoadingBar } from "react-redux-loading";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { handleInitialData } from "../actions/shared";
 import LoggedUser from "./LoggedUser";
@@ -24,34 +19,33 @@ class App extends Component {
   }
   render() {
     const { authedUser } = this.props;
+    console.log(this.props);
     return (
       <Router>
         <div className="App">
           <LoadingBar />
-          {authedUser !== null ? (
-            <div>
+          <div>
+            {authedUser !== null ? (
               <div className="topPanel">
                 <Navigation />
                 <LoggedUser />
               </div>
-              <Switch>
-                <Route path="/questions" exact component={QuestionsList} />
-                <Route path="/questions/:id" exact component={QuestionRouter} />
-                <Route path="/add" exact component={AddQuestion} />
-                <Route path="/leaderboard" exact component={LeaderBoard} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </div>
-          ) : (
-            <Redirect to="/" />
-          )}
-          <Route path="/" exact component={Login} />
+            ) : null}
+            <Switch>
+              <Route path="/questions" exact component={QuestionsList} />
+              <Route path="/questions/:id" exact component={QuestionRouter} />
+              <Route path="/add" exact component={AddQuestion} />
+              <Route path="/leaderboard" exact component={LeaderBoard} />
+              <Route path="/" exact component={Login} />
+              <Route path="*" component={NotFound} />
+            </Switch>
+          </div>
         </div>
       </Router>
     );
   }
 }
-function mapStateToProps({ questions, users, authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
     authedUser,
   };

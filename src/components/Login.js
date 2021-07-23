@@ -5,11 +5,15 @@ import { setAuthedUser } from "../actions/authedUser";
 
 class Login extends Component {
   handleLogin = (id) => {
+    const { from } = this.props.location.state || {
+      from: { pathname: "/questions" },
+    };
     this.props.dispatch(setAuthedUser(id)); // sets authedUser to  chosen user
-    this.props.history.push("/questions"); //redirects to /questions after authed user is set
+    this.props.history.push(from); //redirects to /questions after authed user is set
   };
   render() {
     const { users, usersIdList } = this.props;
+    console.log(this.props);
     return (
       <div>
         <h3>Would you rather...</h3>
